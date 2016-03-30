@@ -1,39 +1,46 @@
-// Ionic Starter App
+angular.module('starter', ['ionic', 'ngCordova'])
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.services'])
+.controller("ExampleController", function ($scope, $cordovaCamera) {
 
-.config(function($compileProvider){
-  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-})
+                $scope.takePhoto = function () {
+                  var options = {
+                    quality: 75,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.CAMERA,
+                    allowEdit: true,
+                    encodingType: Camera.EncodingType.JPEG,
+                    targetWidth: 300,
+                    targetHeight: 300,
+                    popoverOptions: CameraPopoverOptions,
+                    saveToPhotoAlbum: false
+                };
+   
+                    $cordovaCamera.getPicture(options).then(function (imageData) {
+                        $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                    }, function (err) {
+                        // An error occured. Show a message to the user
+                    });
+                }
+                
+                $scope.choosePhoto = function () {
+                  var options = {
+                    quality: 75,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    allowEdit: true,
+                    encodingType: Camera.EncodingType.JPEG,
+                    targetWidth: 300,
+                    targetHeight: 300,
+                    popoverOptions: CameraPopoverOptions,
+                    saveToPhotoAlbum: false
+                };
+   
+                    $cordovaCamera.getPicture(options).then(function (imageData) {
+                        $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                    }, function (err) {
+                        // An error occured. Show a message to the user
+                    });
+                }
+                
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
-
-.controller('MainCtrl', function($scope, Camera) {
-
-  $scope.getPhoto = function() {
-    Camera.getPicture().then(function(imageURI) {
-      console.log(imageURI);
-      $scope.lastPhoto = imageURI;
-    }, function(err) {
-      console.err(err);
-    }, {
-      quality: 75,
-      targetWidth: 320,
-      targetHeight: 320,
-      saveToPhotoAlbum: false
-    });
-  };
-
-})
+            });
