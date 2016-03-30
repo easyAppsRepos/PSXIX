@@ -17,11 +17,12 @@ angular.module('starter', ['ionic', 'ngCordova'])
    
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                        alert($scope.imgURI);
 
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });
-                    alert(imageData);
+
                 }
                 
                 $scope.choosePhoto = function () {
