@@ -7,7 +7,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
                     quality: 75,
                     destinationType: Camera.DestinationType.DATA_URL,
                     sourceType: Camera.PictureSourceType.CAMERA,
-                    allowEdit: true,
+                    allowEdit: false,
                     encodingType: Camera.EncodingType.JPEG,
                     targetWidth: 300,
                     targetHeight: 300,
@@ -17,9 +17,11 @@ angular.module('starter', ['ionic', 'ngCordova'])
    
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
+
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });
+                    alert(imageData);
                 }
                 
                 $scope.choosePhoto = function () {
