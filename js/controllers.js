@@ -4,6 +4,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('ChatsCtrl', function($scope, $cordovaCamera) {
 
+
+    $scope.enviarFoto = function(){
+
+      alert($scope.imgURI);
+    }
+
+
     $scope.takePhoto = function () {
     var options = {
       quality: 75,
@@ -19,7 +26,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
       $cordovaCamera.getPicture(options).then(function (imageData) {
           $scope.imgURI = "data:image/jpeg;base64," + imageData;
-          alert($scope.imgURI);
+       
 
       }, function (err) {
           // An error occured. Show a message to the user
