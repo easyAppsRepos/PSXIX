@@ -1,0 +1,25 @@
+<ion-view view-title="Dashboard">
+
+<ion-nav-title >
+     <img src='img/logo.png' height='90'><span></span>
+</ion-nav-title>
+
+
+  <ion-content class="padding"  style='background-color: rgb(234, 234, 234);'>
+    <h3 style="text-align: center; color: #666; margin-top: 7px;">Agregar Nota</h3>
+    <div>
+          <textarea name="comment" class="textAreaNota" ng-model="report.comment">
+
+      </textarea>
+    </div>
+
+            <div class='row'>
+        <div class='col' style="text-align: center">
+        <button class="button  colorCliente" ng-click="takePhoto()">
+           Enviar
+        </button>
+        </div>
+        </div>
+
+  </ion-content>
+</ion-view>
