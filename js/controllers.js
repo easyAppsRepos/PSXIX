@@ -39,7 +39,9 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
     $scope.takePhoto = function () {
     var options = {
       quality: 75,
-      destinationType: Camera.DestinationType.DATA_URL,
+      //destinationType: Camera.DestinationType.DATA_URL,
+      destinationType: Camera.DestinationType.FILE_URI,
+      
       sourceType: Camera.PictureSourceType.CAMERA,
       allowEdit: false,
       encodingType: Camera.EncodingType.JPEG,
@@ -50,7 +52,8 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
   };
 
       $cordovaCamera.getPicture(options).then(function (imageData) {
-          $scope.imgURI = "data:image/jpeg;base64," + imageData;
+        //  $scope.imgURI = "data:image/jpeg;base64," + imageData;
+        $scope.imgURI=imageData;
        $scope.login();
 
       }, function (err) {
