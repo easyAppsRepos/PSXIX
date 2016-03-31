@@ -3515,7 +3515,7 @@ ion-infinite-scroll {
   top: 88px; }
 
 .has-tabs-top {
-  top: 140px; }
+  top: 102px; }
 
 .has-header.has-subheader.has-tabs-top {
   top: 137px; }
@@ -3862,6 +3862,7 @@ a.subdued {
  * Bar (Headers and Footers)
  * --------------------------------------------------
  */
+
 .bar {
   display: -webkit-box;
   display: -webkit-flex;
@@ -3884,7 +3885,7 @@ a.subdued {
   box-sizing: border-box;
   padding: 5px;
   width: 100%;
-  height: 90px;
+  height: 52px;
   border-width: 0;
   border-style: solid;
   border-top: 1px solid transparent;
@@ -4006,7 +4007,7 @@ a.subdued {
     overflow: hidden;
     margin: 0 10px;
     min-width: 30px;
-    height: 90px;
+    height: 52px;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -5035,7 +5036,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
 /* If you change this, change platform.scss as well */
 .tabs-top > .tabs,
 .tabs.tabs-top {
-  top: 90px;
+  top: 53px;
   padding-top: 0;
   background-position: bottom;
   border-top-width: 0;
