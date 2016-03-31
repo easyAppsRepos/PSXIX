@@ -1,8 +1,33 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope) {
 
-.controller('ChatsCtrl', function($scope, $cordovaCamera) {
+  $scope.enviarNota=function(nota){
+
+    alert(nota);
+  }
+})
+
+.controller('ChatsCtrl', function($scope, $cordovaCamera, $ionicModal, $timeout) {
+
+
+
+$ionicModal.fromTemplateUrl('templates/subirFoto.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  // Triggered in the login modal to close it
+  $scope.closeLogin = function() {
+    $scope.modal.hide();
+  };
+
+  // Open the login modal
+  $scope.login = function() {
+    $scope.modal.show();
+  };
+
 
 
     $scope.enviarFoto = function(){
@@ -26,7 +51,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
       $cordovaCamera.getPicture(options).then(function (imageData) {
           $scope.imgURI = "data:image/jpeg;base64," + imageData;
-       
+       $scope.login();
 
       }, function (err) {
           // An error occured. Show a message to the user
@@ -43,7 +68,11 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 })
 
 .controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+
+      $scope.archivarNota=function(idNota){
+
+        alert('{id:'+idNota+'}');
+      }
+
+
 });
