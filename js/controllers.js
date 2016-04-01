@@ -128,7 +128,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
         var win = function (r) {
         clearCache();
         retries = 0;
-        ionicLoading.hide();
+        $ionicLoading.hide();
         alert('Listo!');
          }
 
@@ -141,7 +141,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
         } else {
             retries = 0;
             clearCache();
-                ionicLoading.hide();
+                $ionicLoading.hide();
             alert('Ups. Ha ocurrido un error!');
         }
          }
