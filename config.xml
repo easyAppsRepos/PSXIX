@@ -21,7 +21,7 @@
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
   <preference name="orientation" value="portrait" />
-  
+
 <gap:config-file platform="android" parent="/manifest">
 <application android:largeHeap="true"></application>
 </gap:config-file>
@@ -36,6 +36,6 @@
 
 
  <icon src="icon.jpg" />
-<splash src="splash.png" />
+
   
 </widget>
