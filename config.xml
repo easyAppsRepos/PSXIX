@@ -21,11 +21,13 @@
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
   <preference name="orientation" value="portrait" />
-  <preference name="SplashScreen" value="splash" />
-    <preference name="splash-screen-duration" value="30000"/> 
+  
+<gap:config-file platform="android" parent="/manifest">
+<application android:largeHeap="true"></application>
+</gap:config-file>
 
 <gap:plugin name="cordova-plugin-file-transfer" version="" source="npm" />
-<gap:plugin name="cordova-plugin-splashscreen" version="" source="npm" />
+
 <gap:plugin name="cordova-plugin-camera" version="" source="npm" />
 <gap:plugin name="cordova-plugin-device" version="" source="npm" />
   <plugin name="ionic-plugin-keyboard" source="npm" />
