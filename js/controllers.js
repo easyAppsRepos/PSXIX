@@ -1,15 +1,22 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
-.controller('DashCtrl', function($scope, $http) {
+.controller('DashCtrl', function($scope, $http,  $ionicLoading) {
 
   $scope.enviarNota=function(notaAdd){
+
+      $ionicLoading.show({
+      template: 'Loading...'
+    });
+
 console.log(notaAdd);
         $http.post('http://mantenimiento.posadasigloxix.com.uy/api/notas/add?comentario='+notaAdd) 
         .success(function(res){
+              $ionicLoading.hide()
           alert("Nota agregada correctamente");
         })
         .error(function(err){
         console.error(err)
+            $ionicLoading.hide()
          alert("Ha ocurrido un error, la nota no pudo ser agregada");
         });
 
@@ -17,7 +24,7 @@ console.log(notaAdd);
   }
 })
 
-.controller('ChatsCtrl', function($scope, $cordovaCamera, $ionicModal, $timeout) {
+.controller('ChatsCtrl', function($scope, $cordovaCamera, $ionicModal, $timeout, $http,$ionicLoading) {
 
 
 
@@ -40,16 +47,24 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
 
     $scope.enviarFoto = function(comentario, prioridadFoto){
+
+          $ionicLoading.show({
+      template: 'Loading...'
+    });
+
+
       console.log(comentario + " = "+ prioridadFoto + " "+ $scope.imgURI);
             $http.post('http://mantenimiento.posadasigloxix.com.uy/api/tareas/add?comentario='+comentario+'&foto='+$scope.imgURI+'&prioridad='+prioridad)
             .success(function(res){
               console.log(res);
+            $ionicLoading.hide()
             alert("Tarea Agregada");
             })
             .error(function(err){
             console.error(err)
-
+            $ionicLoading.hide()
             alert("Ha ocurrido un error agregando la tarea");
+
             });
     }
 
