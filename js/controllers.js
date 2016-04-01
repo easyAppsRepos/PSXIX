@@ -88,25 +88,24 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
 
 
-.controller('AccountCtrl', function($scope, Notas) {
+.controller('AccountCtrl', function($scope, $ionicLoading) {
 
 
 
      //   $scope.getNotas=function(){
+      $ionicLoading.show({
+      template: 'Loading...'
+    });
 
-       $scope.notas = Notas.all();
-       $scope.notas = JSON.stringify($scope.notas);
-       $scope.notas = $scope.notas.$$state.value[2];
-       console.log($scope.notas+ "Stri");
+       //$scope.notas = Notas.all();
 
-       //$scope.notas=[{"id":2,"comentario":"funca","fechaCreated":"2016-03-31 16:41:59"},{"id":3,"comentario":"si","fechaCreated":"2016-03-31 16:42:14"}];
-      /*  
+     $http.get('http://mantenimiento.posadasigloxix.com.uy/api/notas')
+    .success(function(res){
+      console.log("res: "+res);
+      $scope.notas = res;
 
-        console.log(JSON.stringify($scope.notas));
-        $scope.notas=$scope.notas.$$state.value;
-        console.log("sin strinf : "+$scope.notas.$$state.value);
-        var myJsonString = JSON.stringify($scope.notas.$$state.value);
-        console.log ("str: "+ myJsonString);
+      $ionicLoading.hide()
+    });
 
         */
 
