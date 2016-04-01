@@ -60,6 +60,7 @@ angular.module('starter.services', [])
             var defer = $q.defer();
             $http.get('http://mantenimiento.posadasigloxix.com.uy/api/notas')
             .success(function(data) {
+              console.log("data :"+data)
             defer.resolve(data);
             });
             console.log(defer.promise);
