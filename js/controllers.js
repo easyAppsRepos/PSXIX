@@ -1,10 +1,19 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope, $http) {
 
   $scope.enviarNota=function(nota){
 
-    alert(nota);
+        $http.post('http://mantenimiento.posadasigloxix.com.uy/api/notas/add', {comentario:nota}) 
+        .success(function(res){
+          alert("Nota agregada correctamente");
+        })
+        .error(function(err){
+        console.error(err)
+         alert("Ha ocurrido un error, la nota no pudo ser agregada");
+        });
+
+   
   }
 })
 
@@ -30,17 +39,24 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
 
 
-    $scope.enviarFoto = function(){
+    $scope.enviarFoto = function(comentario, prioridadFoto){
 
-      alert($scope.imgURI);
+            $http.post('http://mantenimiento.posadasigloxix.com.uy/api/tareas/add', {comentario:comentario, foto:$scope.imgURI, prioridad:prioridadFoto}) 
+            .success(function(res){
+            alert("Tarea Agregada");
+            })
+            .error(function(err){
+            console.error(err)
+            alert("Ha ocurrido un error agregando la tarea");
+            });
     }
 
 
     $scope.takePhoto = function () {
     var options = {
       quality: 75,
-      //destinationType: Camera.DestinationType.DATA_URL,
-      destinationType: Camera.DestinationType.FILE_URI,
+      destinationType: Camera.DestinationType.DATA_URL,
+      //destinationType: Camera.DestinationType.FILE_URI,
       
       sourceType: Camera.PictureSourceType.CAMERA,
       allowEdit: false,
@@ -52,8 +68,8 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
   };
 
       $cordovaCamera.getPicture(options).then(function (imageData) {
-        //  $scope.imgURI = "data:image/jpeg;base64," + imageData;
-        $scope.imgURI=imageData;
+          $scope.imgURI = "data:image/jpeg;base64," + imageData;
+        //$scope.imgURI=imageData;
        $scope.login();
 
       }, function (err) {
@@ -70,11 +86,33 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
+
+
+.controller('AccountCtrl', function($scope, Notas) {
+
+
+
+     //   $scope.getNotas=function(){
+
+        $scope.notas = Notas.all();
+       //$scope.notas=[{"id":2,"comentario":"funca","fechaCreated":"2016-03-31 16:41:59"},{"id":3,"comentario":"si","fechaCreated":"2016-03-31 16:42:14"}];
+        console.log($scope.notas)
+
+     // }
 
       $scope.archivarNota=function(idNota){
 
-        alert('{id:'+idNota+'}');
+
+        $http.get('http://mantenimiento.posadasigloxix.com.uy/api/notas/archivar/'+idNota) 
+        .success(function(res){
+          console.log(res);
+          if(res=="OK")
+          alert("Nota Archivada");
+        })
+        .error(function(err){
+        console.error(err)
+         alert("Ha ocurrido un error");
+        });
       }
 
 

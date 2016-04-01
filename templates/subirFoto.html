@@ -10,7 +10,7 @@
     <div style="height: 40px"></div>
     <h3 style="text-align: center; color: #666; margin-top: 7px;">Mensaje de foto</h3>
 
-           <textarea style='height: 90px !important' class='textAreaNota'></textarea>
+           <textarea ng-model="foto.comentario" style='height: 90px !important' class='textAreaNota'></textarea>
           <div style="margin-top: 10px; width: 90%; margin-left: 5%;" class="list">
             <label class="item item-input item-select">
               <div id="_label-0" aria-label="
@@ -18,10 +18,10 @@
               " class="input-label">
               Prioridad
               </div>
-              <select>
-                <option value="Baja">Baja</option>
-                <option value="Media" selected="">Media</option>
-                <option value="Alta">Alta</option>
+              <select ng-model='foto.prioridad'>
+                <option value="1">Baja</option>
+                <option value="2" selected="">Media</option>
+                <option value="3">Alta</option>
               </select>
             </label>
           </div>
@@ -29,7 +29,7 @@
             <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}" style="text-align: center">
                 <div class='row'>
         <div class='col' style="text-align: center">
-        <button ng-show="imgURI !== undefined" class="button  colorCliente" ng-click="enviarFoto()">
+        <button ng-show="imgURI !== undefined" class="button  colorCliente" ng-click="enviarFoto(foto.comentario, foto.prioridad)">
             Enviar
         </button>
         </div>

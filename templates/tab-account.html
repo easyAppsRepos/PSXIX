@@ -6,31 +6,16 @@
 
 
   <ion-content style='background-color: rgb(234, 234, 234);'>
-    <div class="card">
-  <div class="item item-divider">
-    1. 25/03/2015 <i ng-click='archivarNota("1");' class='ion-ios-box btnArchivar'></i>	
-  </div>
-  <div class="item item-text-wrap">
-   Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus 
-  </div>
-  </div>
-<div class="card">
-    <div class="item item-divider">
-    2. 26/06/2015  <i ng-click='archivarNota("2")' class='ion-ios-box btnArchivar'></i>	
-  </div>
-  <div class="item item-text-wrap">
-   Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-  </div>
-</div>
-<div class="card">
-      <div class="item item-divider">
-    3. 27/07/2015 <i ng-click='archivarNota("3")' class='ion-ios-box btnArchivar'></i>	
-  </div>
-  <div class="item item-text-wrap">
-   Lorem ipsum dolor sit amet, consectetuer ipsum dolor sit amet, consectetuer  adipiscing elit. 
-  </div>
-</div>
 
-</div>
+   <div class="card" ng-repeat="nota in notas">
+      <div class="item item-divider">
+      {{nota.fechaCreated}} <i ng-click='archivarNota({{nota.id}});' class='ion-ios-box btnArchivar'></i> 
+      </div>
+      <div class="item item-text-wrap">
+      {{nota.comentario}}
+      </div>
+    </div>
+
+
   </ion-content>
 </ion-view>

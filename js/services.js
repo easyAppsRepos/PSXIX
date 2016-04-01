@@ -47,4 +47,29 @@ angular.module('starter.services', [])
       return null;
     }
   };
+})
+
+
+
+
+.factory('Notas', function($q, $http) {
+
+  // Trae todas las notas del api
+  return {
+    all: function() {
+            var defer = $q.defer();
+            $http.get('http://mantenimiento.posadasigloxix.com.uy/api/notas')
+            .success(function(data) {
+            defer.resolve(data);
+            });
+
+            return defer.promise;
+    },
+    remove: function(chat) {
+     
+    },
+    get: function(chatId) {
+
+    }
+  };
 });
