@@ -126,6 +126,11 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
             //$scope.imgURI
 
         var win = function (r) {
+
+             console.log("Code = " + r.responseCode);
+    console.log("Response = " + r.response);
+    console.log("Sent = " + r.bytesSent);
+    
         clearCache();
         retries = 0;
         $ionicLoading.hide();
@@ -149,7 +154,11 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
     options.fileKey = "file";
     options.fileName = $scope.imgURI.substr($scope.imgURI.lastIndexOf('/') + 1);
     options.mimeType = "image/jpeg";
-    options.params = {comentario:comentario,prioridad:prioridadFoto}; //
+    var params = {};
+    params.comentario = comentario;
+    params.prioridad = prioridadFoto;
+
+    options.params = params; //
     var ft = new FileTransfer();
     ft.upload($scope.imgURI, encodeURI("http://mantenimiento.posadasigloxix.com.uy/api/tareas/add"), win, fail, options);
 
@@ -181,7 +190,7 @@ $scope.btnTomarFoto = false;
        $scope.login();
 
       }, function (err) {
-         
+             $scope.btnTomarFoto = true;
       });
 
   }
