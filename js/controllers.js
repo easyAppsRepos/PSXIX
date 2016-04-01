@@ -2,9 +2,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('DashCtrl', function($scope, $http) {
 
-  $scope.enviarNota=function(nota){
-
-        $http.post('http://mantenimiento.posadasigloxix.com.uy/api/notas/add', {comentario:nota}) 
+  $scope.enviarNota=function(notaAdd){
+console.log(notaAdd);
+        $http.post('http://mantenimiento.posadasigloxix.com.uy/api/notas/add?comentario='+notaAdd) 
         .success(function(res){
           alert("Nota agregada correctamente");
         })
