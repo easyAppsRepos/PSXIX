@@ -31,46 +31,36 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
  
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.nuevaNota', {
+    url: '/nuevaNota',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-nuevaNota': {
+        templateUrl: 'templates/tab-nuevaNota.html',
+        controller: 'nuevaNotaCtrl'
       }
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.nuevaTarea', {
+      url: '/nuevaTarea',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
-    })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+        'tab-nuevaTarea': {
+          templateUrl: 'templates/tab-nuevaTarea.html',
+          controller: 'nuevaTareaCtrl'
         }
       }
     })
 
-  .state('tab.account', {
-    url: '/account',
+
+  .state('tab.listaNotas', {
+    url: '/listaNotas',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+      'tab-listaNotas': {
+        templateUrl: 'templates/tab-listaNotas.html',
+        controller: 'listaNotasCtrl'
       }
     }
   });
-
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/nuevaNota');
 
 });

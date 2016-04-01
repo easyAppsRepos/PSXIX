@@ -1,25 +1,21 @@
-<!--
-Create tabs with an icon and label, using the tabs-positive style.
-Each tab's child <ion-nav-view> directive will have its own
-navigation history that also transitions its views in and out.
--->
+
 <ion-tabs  class="tabs-icon-top tabs-color-active-positive" >
 
- <!-- Chats Tab -->
-  <ion-tab title="Nueva Tarea" icon-off="ion-camera" icon-on="ion-camera" href="#/tab/chats">
-    <ion-nav-view name="tab-chats"></ion-nav-view>
+ <!-- nuevaTarea Tab -->
+  <ion-tab title="Nueva Tarea" icon-off="ion-camera" icon-on="ion-camera" href="#/tab/nuevaTarea">
+    <ion-nav-view name="tab-nuevaTarea"></ion-nav-view>
   </ion-tab>
 
 
-  <!-- Dashboard Tab -->
-  <ion-tab title="Nueva Nota" icon-off="ion-edit" icon-on="ion-edit" href="#/tab/dash">
-    <ion-nav-view name="tab-dash"></ion-nav-view>
+  <!-- nuevaNota Tab -->
+  <ion-tab title="Nueva Nota" icon-off="ion-edit" icon-on="ion-edit" href="#/tab/nuevaNota">
+    <ion-nav-view name="tab-nuevaNota"></ion-nav-view>
   </ion-tab>
 
  
-  <!-- Account Tab -->
-  <ion-tab title="Notas" icon-off="ion-document-text" icon-on="ion-document-text" href="#/tab/account" >
-    <ion-nav-view name="tab-account"></ion-nav-view>
+  <!--  listaNotas Tab -->
+  <ion-tab title="Notas" icon-off="ion-document-text" icon-on="ion-document-text" href="#/tab/listaNotas" >
+    <ion-nav-view name="tab-listaNotas"></ion-nav-view>
   </ion-tab>
 
 

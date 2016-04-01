@@ -1,6 +1,12 @@
+/***********************************************************
+  Programador: Jose Alfaro.  
+  Email: jralfarog@gmail.com
+************************************************************/
+
+
 angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
-.controller('DashCtrl', function($scope, $http,  $ionicLoading) {
+.controller('nuevaNotaCtrl', function($scope, $http,  $ionicLoading) {
 
   $scope.enviarNota=function(notaAdd){
 
@@ -8,7 +14,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       template: 'Cargando...'
     });
 
-console.log(notaAdd);
+
         $http.post('http://mantenimiento.posadasigloxix.com.uy/api/notas/add?comentario='+notaAdd) 
         .success(function(res){
               $ionicLoading.hide();
@@ -16,7 +22,7 @@ console.log(notaAdd);
           alert("Nota agregada correctamente");
         })
         .error(function(err){
-        console.error(err)
+    
             $ionicLoading.hide();
          alert("Ha ocurrido un error, la nota no pudo ser agregada");
         });
@@ -25,7 +31,7 @@ console.log(notaAdd);
   }
 })
 
-.controller('ChatsCtrl', function($scope, $cordovaCamera, $ionicModal, $timeout, $http,$ionicLoading) {
+.controller('nuevaTareaCtrl', function($scope, $cordovaCamera, $ionicModal, $timeout, $http,$ionicLoading) {
 
 $scope.btnTomarFoto = true;
 
@@ -35,12 +41,11 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
     $scope.modal = modal;
   });
 
-  // Triggered in the login modal to close it
   $scope.closeLogin = function() {
     $scope.modal.hide();
   };
 
-  // Open the login modal
+
   $scope.login = function() {
     $scope.modal.show();
     $scope.btnTomarFoto = true;
@@ -55,15 +60,15 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
     });
 
 
-      console.log(comentario + " = "+ prioridadFoto + " "+ $scope.imgURI);
+      console.log(comentario + "-"+ prioridadFoto + "-"+ $scope.imgURI);
             $http.post('http://mantenimiento.posadasigloxix.com.uy/api/tareas/add?comentario='+comentario+'&foto='+$scope.imgURI+'&prioridad='+prioridad)
             .success(function(res){
-              console.log(res);
+
             $ionicLoading.hide();
             alert("Tarea Agregada");
             })
             .error(function(err){
-            console.error(err)
+
             $ionicLoading.hide();
             alert("Ha ocurrido un error agregando la tarea");
 
@@ -94,7 +99,7 @@ $scope.btnTomarFoto = false;
        $scope.login();
 
       }, function (err) {
-          // An error occured. Show a message to the user
+         
       });
 
   }
@@ -103,28 +108,20 @@ $scope.btnTomarFoto = false;
 
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
 
 
-
-.controller('AccountCtrl', function($scope, $ionicLoading, $http) {
-
+.controller('listaNotasCtrl', function($scope, $ionicLoading, $http) {
 
 
-     //   $scope.getNotas=function(){
     $scope.actualizarNotas = function(){
 
       $ionicLoading.show({
       template: 'Cargando...'
     });
 
-       //$scope.notas = Notas.all();
 
      $http.get('http://mantenimiento.posadasigloxix.com.uy/api/notas')
     .success(function(res){
-      console.log("res: "+res);
       $scope.notas = res;
 
       $ionicLoading.hide();
@@ -137,11 +134,6 @@ $scope.btnTomarFoto = false;
 $scope.actualizarNotas();
       
 
-     // }
-             
-          //   $scope.notas= {"$$state":{"status":0,"value":[{"comentario": "asd"},{"comentario": "asd"}]}};
-        //         $scope.notas=  $scope.notas.$$state.value;
-
       $scope.archivarNota=function(idNota){
 
    $ionicLoading.show({
@@ -151,14 +143,16 @@ $scope.actualizarNotas();
         $http.get('http://mantenimiento.posadasigloxix.com.uy/api/notas/archivar/'+idNota) 
         .success(function(res){
           $ionicLoading.hide();
-          console.log(res);
-          if(res=="OK")
+
+          if(res=="OK"){
             
           alert("Nota Archivada");
+          }
+          else{alert("Ha ocurrido un error");}
         $scope.actualizarNotas();
         })
         .error(function(err){
-        console.error(err)
+
         $ionicLoading.hide();
          alert("Ha ocurrido un error");
         });

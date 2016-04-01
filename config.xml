@@ -21,12 +21,18 @@
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
   <preference name="orientation" value="portrait" />
+  <preference name="SplashScreen" value="splash" />
+    <preference name="splash-screen-duration" value="15000"/> 
 
-
-
+<gap:plugin name="cordova-plugin-splashscreen" version="" source="npm" />
 <gap:plugin name="cordova-plugin-camera" version="" source="npm" />
 <gap:plugin name="cordova-plugin-device" version="" source="npm" />
   <plugin name="ionic-plugin-keyboard" source="npm" />
    <gap:plugin name="cordova-plugin-whitelist" version="1.0.0" source="npm" />
   <gap:plugin name="cordova-plugin-network-information" source="npm" version="1.0.1" />
+
+
+ <icon src="icon.jpg" />
+<splash src="splash.png" />
+  
 </widget>
