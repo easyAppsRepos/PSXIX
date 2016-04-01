@@ -31,9 +31,58 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   }
 })
 
-.controller('nuevaTareaCtrl', function($scope, $cordovaCamera, $ionicModal, $timeout, $http,$ionicLoading) {
+.controller('nuevaTareaCtrl', function($scope, $cordovaCamera, $cordovaFileTransfer, $ionicModal, $timeout, $http,$ionicLoading) {
 
 $scope.btnTomarFoto = true;
+
+function clearCache() {
+    navigator.camera.cleanup();
+}
+
+var retries = 0;
+
+function onCapturePhoto(fileURI) {
+    var win = function (r) {
+        clearCache();
+        retries = 0;
+        alert('Listo!');
+    }
+ 
+    var fail = function (error) {
+        if (retries == 0) {
+            retries ++
+            setTimeout(function() {
+                onCapturePhoto(fileURI)
+            }, 1000)
+        } else {
+            retries = 0;
+            clearCache();
+            alert('Ups. Ha ocurrido un error!');
+        }
+    }
+  var options = new FileUploadOptions();
+    options.fileKey = "file";
+    options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+    options.mimeType = "image/jpeg";
+    options.params = {}; // if we need to send parameters to the server request
+    var ft = new FileTransfer();
+    ft.upload(fileURI, encodeURI("http://host/upload"), win, fail, options);
+}
+
+function capturePhoto() {
+    navigator.camera.getPicture(onCapturePhoto, onFail, {
+        quality: 100,
+        destinationType: destinationType.FILE_URI
+    });
+}
+ 
+function onFail(message) {
+    alert('Failed because: ' + message);
+}
+
+
+
+
 
 $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
     scope: $scope
@@ -59,7 +108,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
       template: 'Cargando...'
     });
 
-
+/*
       console.log(comentario + "-"+ prioridadFoto + "-"+ $scope.imgURI);
             $http.post('http://mantenimiento.posadasigloxix.com.uy/api/tareas/add?comentario='+comentario+'&foto='+$scope.imgURI+'&prioridad='+prioridad)
             .then(function(response){
@@ -72,6 +121,40 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
             alert("Ha ocurrido un error agregando la tarea");
 
             });
+            */
+
+            //$scope.imgURI
+
+        var win = function (r) {
+        clearCache();
+        retries = 0;
+        ionicLoading.hide();
+        alert('Listo!');
+         }
+
+         var fail = function (error) {
+        if (retries == 0) {
+            retries ++
+            setTimeout(function() {
+                $scope.enviarFoto(comentario, prioridadFoto);
+            }, 1000)
+        } else {
+            retries = 0;
+            clearCache();
+                ionicLoading.hide();
+            alert('Ups. Ha ocurrido un error!');
+        }
+         }
+ var options = new FileUploadOptions();
+    options.fileKey = "file";
+    options.fileName = $scope.imgURI.substr($scope.imgURI.lastIndexOf('/') + 1);
+    options.mimeType = "image/jpeg";
+    options.params = {comentario:comentario,prioridad:prioridadFoto}; //
+    var ft = new FileTransfer();
+    ft.upload($scope.imgURI, encodeURI("http://mantenimiento.posadasigloxix.com.uy/api/tareas/add"), win, fail, options);
+
+
+
     }
 
 
@@ -80,8 +163,8 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 $scope.btnTomarFoto = false;
     var options = {
       quality: 50,
-      destinationType: Camera.DestinationType.DATA_URL,
-      //destinationType: Camera.DestinationType.FILE_URI,
+      //destinationType: Camera.DestinationType.DATA_URL,
+      destinationType: Camera.DestinationType.FILE_URI,
       correctOrientation: true,
       sourceType: Camera.PictureSourceType.CAMERA,
       allowEdit: false,
@@ -93,8 +176,8 @@ $scope.btnTomarFoto = false;
   };
 
       $cordovaCamera.getPicture(options).then(function (imageData) {
-          $scope.imgURI = "data:image/jpeg;base64," + imageData;
-        //$scope.imgURI=imageData;
+      //    $scope.imgURI = "data:image/jpeg;base64," + imageData;
+      $scope.imgURI=imageData;
        $scope.login();
 
       }, function (err) {

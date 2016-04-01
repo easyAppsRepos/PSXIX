@@ -6,7 +6,16 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform) {
+
+  var pictureSource;   // picture source
+var destinationType; // sets the format of returned value
+
   $ionicPlatform.ready(function() {
+
+   pictureSource = navigator.camera.PictureSourceType;
+    destinationType = navigator.camera.DestinationType;
+    
+
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
