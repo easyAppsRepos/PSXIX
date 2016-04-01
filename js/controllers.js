@@ -62,12 +62,11 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
       console.log(comentario + "-"+ prioridadFoto + "-"+ $scope.imgURI);
             $http.post('http://mantenimiento.posadasigloxix.com.uy/api/tareas/add?comentario='+comentario+'&foto='+$scope.imgURI+'&prioridad='+prioridad)
-            .success(function(res){
+            .then(function(response){
 
             $ionicLoading.hide();
             alert("Tarea Agregada");
-            })
-            .error(function(err){
+            },function(response){
 
             $ionicLoading.hide();
             alert("Ha ocurrido un error agregando la tarea");
