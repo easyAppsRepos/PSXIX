@@ -94,15 +94,25 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
      //   $scope.getNotas=function(){
 
-        $scope.notas = Notas.all();
+       $scope.notas = Notas.all();
+       $scope.notas = JSON.stringify($scope.notas);
+       $scope.notas = $scope.notas.$$state.value;
+
        //$scope.notas=[{"id":2,"comentario":"funca","fechaCreated":"2016-03-31 16:41:59"},{"id":3,"comentario":"si","fechaCreated":"2016-03-31 16:42:14"}];
-        console.log($scope.notas)
+      /*  
+
+        console.log(JSON.stringify($scope.notas));
         $scope.notas=$scope.notas.$$state.value;
         console.log("sin strinf : "+$scope.notas.$$state.value);
         var myJsonString = JSON.stringify($scope.notas.$$state.value);
         console.log ("str: "+ myJsonString);
 
+        */
+
      // }
+             
+          //   $scope.notas= {"$$state":{"status":0,"value":[{"comentario": "asd"},{"comentario": "asd"}]}};
+        //         $scope.notas=  $scope.notas.$$state.value;
 
       $scope.archivarNota=function(idNota){
 
