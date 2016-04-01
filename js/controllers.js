@@ -88,7 +88,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
 
 
-.controller('AccountCtrl', function($scope, $ionicLoading) {
+.controller('AccountCtrl', function($scope, $ionicLoading, $http) {
 
 
 
@@ -107,7 +107,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
       $ionicLoading.hide()
     });
 
-        */
+      
 
      // }
              
