@@ -97,6 +97,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
         $scope.notas = Notas.all();
        //$scope.notas=[{"id":2,"comentario":"funca","fechaCreated":"2016-03-31 16:41:59"},{"id":3,"comentario":"si","fechaCreated":"2016-03-31 16:42:14"}];
         console.log($scope.notas)
+        console.log($scope.notas.$$state.value)
 
      // }
 

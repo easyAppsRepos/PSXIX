@@ -62,7 +62,7 @@ angular.module('starter.services', [])
             .success(function(data) {
             defer.resolve(data);
             });
-
+            console.log(defer.promise);
             return defer.promise;
     },
     remove: function(chat) {
