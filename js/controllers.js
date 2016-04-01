@@ -79,10 +79,10 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
 $scope.btnTomarFoto = false;
     var options = {
-      quality: 75,
+      quality: 50,
       destinationType: Camera.DestinationType.DATA_URL,
       //destinationType: Camera.DestinationType.FILE_URI,
-      
+      correctOrientation: true,
       sourceType: Camera.PictureSourceType.CAMERA,
       allowEdit: false,
       encodingType: Camera.EncodingType.JPEG,
