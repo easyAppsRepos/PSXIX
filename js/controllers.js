@@ -40,13 +40,15 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
 
     $scope.enviarFoto = function(comentario, prioridadFoto){
-
-            $http.post('http://mantenimiento.posadasigloxix.com.uy/api/tareas/add', {comentario:comentario, foto:$scope.imgURI, prioridad:prioridadFoto}) 
+      console.log(comentario + " = "+ prioridadFoto + " "+ $scope.imgURI);
+            $http.post('http://mantenimiento.posadasigloxix.com.uy/api/tareas/add?comentario='+comentario+'&foto='+$scope.imgURI+'&prioridad='+prioridad)
             .success(function(res){
+              console.log(res);
             alert("Tarea Agregada");
             })
             .error(function(err){
             console.error(err)
+
             alert("Ha ocurrido un error agregando la tarea");
             });
     }
@@ -93,6 +95,8 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
 
      //   $scope.getNotas=function(){
+    $scope.actualizarNotas = function(){
+
       $ionicLoading.show({
       template: 'Loading...'
     });
@@ -105,8 +109,13 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
       $scope.notas = res;
 
       $ionicLoading.hide()
-    });
+    }).finally(function() {
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  }
 
+
+$scope.actualizarNotas();
       
 
      // }
