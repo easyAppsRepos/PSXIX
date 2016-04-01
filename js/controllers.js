@@ -130,7 +130,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
              console.log("Code = " + r.responseCode);
     console.log("Response = " + r.response);
     console.log("Sent = " + r.bytesSent);
-    
+
         clearCache();
         retries = 0;
         $ionicLoading.hide();
@@ -151,7 +151,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
         }
          }
  var options = new FileUploadOptions();
-    options.fileKey = "file";
+    options.fileKey = "foto";
     options.fileName = $scope.imgURI.substr($scope.imgURI.lastIndexOf('/') + 1);
     options.mimeType = "image/jpeg";
     var params = {};
