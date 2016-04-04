@@ -40,6 +40,7 @@ $scope.report={};
 
 .controller('nuevaTareaCtrl', function($scope, $cordovaNetwork, $cordovaCamera, $cordovaFileTransfer, $ionicModal, $timeout, $http,$ionicLoading) {
 
+$scope.foto={};
 $scope.btnTomarFoto = true;
 
 function clearCache() {
@@ -111,6 +112,8 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
     $scope.enviarFoto = function(comentario, prioridadFoto){
 
+
+
           $ionicLoading.show({
       template: 'Cargando...'
     });
@@ -168,7 +171,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
     options.params = params; //
     var ft = new FileTransfer();
     ft.upload($scope.imgURI, encodeURI("http://mantenimiento.posadasigloxix.com.uy/api/tareas/add"), win, fail, options);
-
+    $scope.foto='';
 
 
     }
@@ -211,7 +214,7 @@ $scope.btnTomarFoto = false;
 
 
 
-.controller('listaNotasCtrl', function($scope, $ionicLoading, $http) {
+.controller('listaNotasCtrl', function($scope, $ionicLoading, $http, $cordovaNetwork) {
 
    var isOnline = $cordovaNetwork.isOnline();
   
