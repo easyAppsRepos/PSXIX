@@ -12,14 +12,14 @@ $scope.report={};
 
 
 
-      $ionicLoading.show({
-      template: 'Cargando...'
-    });
-
 
     var isOnline = $cordovaNetwork.isOnline()
 
     if(isOnline){
+
+      $ionicLoading.show({
+      template: 'Cargando...'
+    });
 
         $http.post('http://mantenimiento.posadasigloxix.com.uy/api/notas/add?comentario='+notaAdd) 
         .success(function(res){
@@ -38,7 +38,7 @@ $scope.report={};
   }
 })
 
-.controller('nuevaTareaCtrl', function($scope, $cordovaCamera, $cordovaFileTransfer, $ionicModal, $timeout, $http,$ionicLoading) {
+.controller('nuevaTareaCtrl', function($scope, $cordovaNetwork, $cordovaCamera, $cordovaFileTransfer, $ionicModal, $timeout, $http,$ionicLoading) {
 
 $scope.btnTomarFoto = true;
 
@@ -175,7 +175,8 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
 
     $scope.takePhoto = function () {
-
+   var isOnline = $cordovaNetwork.isOnline();
+   if(isOnline){
 $scope.btnTomarFoto = false;
     var options = {
       quality: 50,
@@ -198,8 +199,10 @@ $scope.btnTomarFoto = false;
 
       }, function (err) {
              $scope.btnTomarFoto = true;
-      });
-
+       });
+      } else{
+      	alert("Es necesario tener conexion a internet para agregar una tarea");
+      }
   }
 
 
@@ -210,9 +213,10 @@ $scope.btnTomarFoto = false;
 
 .controller('listaNotasCtrl', function($scope, $ionicLoading, $http) {
 
-
+   var isOnline = $cordovaNetwork.isOnline();
+  
     $scope.actualizarNotas = function(){
-
+ 	if(isOnline){
       $ionicLoading.show({
       template: 'Cargando...'
     });
@@ -226,6 +230,8 @@ $scope.btnTomarFoto = false;
     }).finally(function() {
        $scope.$broadcast('scroll.refreshComplete');
      });
+     }
+     else{alert("No dispones de conexion a internet");}
   }
 
 
@@ -233,7 +239,7 @@ $scope.actualizarNotas();
       
 
       $scope.archivarNota=function(idNota){
-
+if(isOnline){
    $ionicLoading.show({
       template: 'Cargando...'
     });
@@ -254,6 +260,8 @@ $scope.actualizarNotas();
         $ionicLoading.hide();
          alert("Ha ocurrido un error");
         });
+        }
+        else{alert("No dispones de conexion a internet para realizar esta tarea")}
       }
 
 
