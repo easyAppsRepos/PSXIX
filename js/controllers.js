@@ -219,6 +219,7 @@ $scope.btnTomarFoto = false;
    var isOnline = $cordovaNetwork.isOnline();
   
     $scope.actualizarNotas = function(){
+     isOnline = $cordovaNetwork.isOnline();
  	if(isOnline){
       $ionicLoading.show({
       template: 'Cargando...'
@@ -242,6 +243,7 @@ $scope.actualizarNotas();
       
 
       $scope.archivarNota=function(idNota){
+      	  var isOnline = $cordovaNetwork.isOnline();
 if(isOnline){
    $ionicLoading.show({
       template: 'Cargando...'
