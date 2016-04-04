@@ -6,28 +6,35 @@
 
 angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
-.controller('nuevaNotaCtrl', function($scope, $http,  $ionicLoading) {
-
+.controller('nuevaNotaCtrl', function($scope, $http,  $ionicLoading, $cordovaNetwork) {
+$scope.report={};
   $scope.enviarNota=function(notaAdd){
+
+
 
       $ionicLoading.show({
       template: 'Cargando...'
     });
 
 
+    var isOnline = $cordovaNetwork.isOnline()
+
+    if(isOnline){
+
         $http.post('http://mantenimiento.posadasigloxix.com.uy/api/notas/add?comentario='+notaAdd) 
         .success(function(res){
               $ionicLoading.hide();
 
           alert("Nota agregada correctamente");
+          $scope.report.comment='';
         })
         .error(function(err){
     
             $ionicLoading.hide();
          alert("Ha ocurrido un error, la nota no pudo ser agregada");
         });
-
-   
+		}
+   		else{alert("Error, no tienes conexion de internet")}
   }
 })
 
