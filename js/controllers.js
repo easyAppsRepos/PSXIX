@@ -111,6 +111,9 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
 
     $scope.enviarFoto = function(comentario, prioridadFoto){
+   var isOnline = $cordovaNetwork.isOnline()
+
+    if(isOnline){
 
 
 
@@ -173,7 +176,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
     ft.upload($scope.imgURI, encodeURI("http://mantenimiento.posadasigloxix.com.uy/api/tareas/add"), win, fail, options);
     $scope.foto='';
 
-
+}else{alert("Es necesario conexion a internet")}
     }
 
 
