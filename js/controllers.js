@@ -6,7 +6,7 @@
 
 angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
-.controller('nuevaNotaCtrl', function($scope, $http,  $ionicLoading, $cordovaNetwork) {
+.controller('nuevaNotaCtrl', function($scope, $http,  $ionicLoading, $cordovaNetwork, $setTimeout, $q, $ionicPopup) {
 $scope.report={};
   $scope.enviarNota=function(notaAdd){
 
@@ -25,8 +25,15 @@ $scope.report={};
         .success(function(res){
               $ionicLoading.hide();
 
-          alert("Nota agregada correctamente");
+              $ionicPopup.alert({
+              title: 'Nota agregada',
+              content: 'La nota fue agregada'
+            }).then(function(res) {
+              console.log('necesaria conexion ainternet');
+            });
+
           $scope.report.comment='';
+         
         })
         .error(function(err){
     
@@ -34,14 +41,26 @@ $scope.report={};
          alert("Ha ocurrido un error, la nota no pudo ser agregada");
         });
 		}
-   		else{alert("Error, no tienes conexion de internet")}
+   		else{
+                    $ionicPopup.alert({
+              title: 'Error',
+              content: 'Es necesaria conexión a internet'
+            }).then(function(res) {
+              console.log('necesaria conexion ainternet');
+            });
+
+      }
   }
 })
 
-.controller('nuevaTareaCtrl', function($scope, $cordovaNetwork, $cordovaCamera, $cordovaFileTransfer, $ionicModal, $timeout, $http,$ionicLoading) {
+.controller('nuevaTareaCtrl', function($scope, $cordovaNetwork, $cordovaCamera, $cordovaFileTransfer, $ionicModal, $timeout, $http,$ionicLoading, $q, $ionicPopup) {
 
 $scope.foto={};
 $scope.btnTomarFoto = true;
+
+       
+
+
 
 function clearCache() {
     navigator.camera.cleanup();
@@ -99,6 +118,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
   });
 
   $scope.closeLogin = function() {
+    $scope.foto='';
     $scope.modal.hide();
   };
 
@@ -111,7 +131,8 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
 
 
     $scope.enviarFoto = function(comentario, prioridadFoto){
-   var isOnline = $cordovaNetwork.isOnline()
+   var isOnline = $cordovaNetwork.isOnline();
+   if(prioridadFoto !== undefined){
 
     if(isOnline){
 
@@ -175,9 +196,31 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
     var ft = new FileTransfer();
     ft.upload($scope.imgURI, encodeURI("http://mantenimiento.posadasigloxix.com.uy/api/tareas/add"), win, fail, options);
     $scope.foto='';
+    $scope.closeLogin; 
 
-}else{alert("Es necesario conexion a internet")}
-    }
+}else{
+
+            $ionicPopup.alert({
+              title: 'Error',
+              content: 'Es necesaria conexión a internet'
+            }).then(function(res) {
+              console.log('necesaria conexion ainternet');
+            });
+
+}
+  }else{
+
+            $ionicPopup.alert({
+              title: 'Espacio requerido',
+              content: 'Debe definir una prioridad'
+            }).then(function(res) {
+              console.log('priori');
+            });
+
+
+  }
+
+  }
 
 
     $scope.takePhoto = function () {
@@ -185,15 +228,15 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
    if(isOnline){
 $scope.btnTomarFoto = false;
     var options = {
-      quality: 50,
+      quality: 100,
       //destinationType: Camera.DestinationType.DATA_URL,
       destinationType: Camera.DestinationType.FILE_URI,
       correctOrientation: true,
       sourceType: Camera.PictureSourceType.CAMERA,
       allowEdit: false,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 300,
-      targetHeight: 300,
+      targetWidth:  1600,
+      targetHeight: 1600,
       popoverOptions: CameraPopoverOptions,
       saveToPhotoAlbum: false
   };
@@ -207,8 +250,15 @@ $scope.btnTomarFoto = false;
              $scope.btnTomarFoto = true;
        });
       } else{
-      	alert("Es necesario tener conexion a internet para agregar una tarea");
+                    $ionicPopup.alert({
+              title: 'Error',
+              content: 'Es necesaria conexión a internet'
+            }).then(function(res) {
+              console.log('necesaria conexion ainternet');
+            });
       }
+
+    
   }
 
 
@@ -217,7 +267,7 @@ $scope.btnTomarFoto = false;
 
 
 
-.controller('listaNotasCtrl', function($scope, $ionicLoading, $http, $cordovaNetwork) {
+.controller('listaNotasCtrl', function($scope, $ionicLoading, $http, $cordovaNetwork, $timeout, $q, $ionicPopup) {
 
    var isOnline = $cordovaNetwork.isOnline();
   
@@ -238,7 +288,15 @@ $scope.btnTomarFoto = false;
        $scope.$broadcast('scroll.refreshComplete');
      });
      }
-     else{alert("No dispones de conexion a internet");}
+     else{
+                          $ionicPopup.alert({
+              title: 'Error',
+              content: 'Es necesaria conexión a internet'
+            }).then(function(res) {
+              console.log('necesaria conexion ainternet');
+            });
+
+    }
   }
 
 
@@ -258,9 +316,18 @@ if(isOnline){
 
           if(res=="OK"){
             
-          alert("Nota Archivada");
+              $ionicPopup.alert({
+              title: 'Nota archivada',
+              content: 'La nota fue archivada'
+            }).then(function(res) {
+              console.log('nota archi');
+            });
+
           }
-          else{alert("Ha ocurrido un error");}
+          else{
+            alert("Ha ocurrido un error");
+
+          }
         $scope.actualizarNotas();
         })
         .error(function(err){
@@ -269,7 +336,16 @@ if(isOnline){
          alert("Ha ocurrido un error");
         });
         }
-        else{alert("No dispones de conexion a internet para realizar esta tarea")}
+        else{
+
+                    $ionicPopup.alert({
+              title: 'Error',
+              content: 'Es necesaria conexión a internet'
+            }).then(function(res) {
+              console.log('necesaria conexion ainternet');
+            });
+
+        }
       }
 
 
