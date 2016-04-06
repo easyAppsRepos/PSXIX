@@ -169,6 +169,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
         retries = 0;
         $ionicLoading.hide();
         alert('Listo!');
+            $scope.closeLogin(); 
          }
 
          var fail = function (error) {
@@ -196,7 +197,7 @@ $ionicModal.fromTemplateUrl('templates/subirFoto.html', {
     var ft = new FileTransfer();
     ft.upload($scope.imgURI, encodeURI("http://mantenimiento.posadasigloxix.com.uy/api/tareas/add"), win, fail, options);
     $scope.foto='';
-    $scope.closeLogin; 
+
 
 }else{
 
