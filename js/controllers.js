@@ -6,7 +6,7 @@
 
 angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
-.controller('nuevaNotaCtrl', function($scope, $http,  $ionicLoading, $cordovaNetwork, $setTimeout, $q, $ionicPopup) {
+.controller('nuevaNotaCtrl', function($scope, $http,  $ionicLoading, $cordovaNetwork, $timeout, $q, $ionicPopup) {
 $scope.report={};
   $scope.enviarNota=function(notaAdd){
 
