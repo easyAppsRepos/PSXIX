@@ -1,75 +1,24 @@
-/***********************************************************
-  Programador: Jose Alfaro.  
-  Email: jralfarog@gmail.com
-************************************************************/
+// Ionic Starter App
 
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+// angular.module is a global place for creating, registering and retrieving Angular modules
+// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// the 2nd parameter is an array of 'requires'
+angular.module('starter', ['ionic'])
 
 .run(function($ionicPlatform) {
-
-  var pictureSource;   // picture source
-var destinationType; // sets the format of returned value
-
   $ionicPlatform.ready(function() {
-
-   pictureSource = navigator.camera.PictureSourceType;
-    destinationType = navigator.camera.DestinationType;
-    
-
-    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+
+      // Don't remove this line unless you know what you are doing. It stops the viewport
+      // from snapping when text inputs are focused. Ionic handles this internally for
+      // a much nicer keyboard experience.
       cordova.plugins.Keyboard.disableScroll(true);
     }
-    if (window.StatusBar) {
+    if(window.StatusBar) {
       StatusBar.styleDefault();
     }
   });
 })
-
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-
-
- $ionicConfigProvider.tabs.position('top');
-  $stateProvider
-
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
-  })
-
- 
-
-  .state('tab.nuevaNota', {
-    url: '/nuevaNota',
-    views: {
-      'tab-nuevaNota': {
-        templateUrl: 'templates/tab-nuevaNota.html',
-        controller: 'nuevaNotaCtrl'
-      }
-    }
-  })
-
-  .state('tab.nuevaTarea', {
-      url: '/nuevaTarea',
-      views: {
-        'tab-nuevaTarea': {
-          templateUrl: 'templates/tab-nuevaTarea.html',
-          controller: 'nuevaTareaCtrl'
-        }
-      }
-    })
-
-
-  .state('tab.listaNotas', {
-    url: '/listaNotas',
-    views: {
-      'tab-listaNotas': {
-        templateUrl: 'templates/tab-listaNotas.html',
-        controller: 'listaNotasCtrl'
-      }
-    }
-  });
-  $urlRouterProvider.otherwise('/tab/nuevaNota');
-
-});
