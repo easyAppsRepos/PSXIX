@@ -57,9 +57,11 @@ angular.module('starter.controllers', [])
 
 
 .controller('loginCtrl', function($scope, $stateParams, login) {
-
+$scope.loginData={};
   $scope.doLogin = function (){
-    login.login();
+    var user = $scope.loginData.username;
+    console.log(user);
+   login.login(user);
     console.log('loginnnn');
   }
 })
@@ -67,7 +69,7 @@ angular.module('starter.controllers', [])
 .factory('login', function($http, $q) {
   return {
     login: function(user) {
-
+console.log(user);
   var deferred = $q.defer();
       $http({
     method: 'POST',
@@ -79,7 +81,7 @@ angular.module('starter.controllers', [])
         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
         return str.join("&");
     },
-    data: {grant_type:'password',client_id:'misuperapp',client_secret:'misuperappsecret',username:'demo10@solinte.net',password:'demo'}
+    data: {grant_type:'password',client_id:'misuperapp',client_secret:'misuperappsecret',username:user,password:'demo'}
 }).success(function (response, status) {console.log(response);
   deferred.resolve(response);});
     return deferred.promise;
