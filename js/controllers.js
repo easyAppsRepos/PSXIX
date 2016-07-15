@@ -81,7 +81,7 @@ console.log(user);
         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
         return str.join("&");
     },
-    data: {grant_type:'password',client_id:'misuperapp',client_secret:'misuperappsecret',username:user,password:'demo'}
+    data: {grant_type:'password',client_id:'solinteasyeapp',client_secret:'plmoknijbuhvygctfxrdzesawq',username:user,password:'demo'}
 }).success(function (response, status) {console.log(response);
   deferred.resolve(response);});
     return deferred.promise;
