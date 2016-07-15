@@ -67,14 +67,14 @@ angular.module('starter.controllers', [])
 .factory('login', function($http, $q) {
   return {
     login: function(user) {
+
+      var dat={grant_type:'password',client_id:'misuperapp',client_secret:'misuperappsecret',username:'demo11@solinte.net',password:'demo'};
       var deferred = $q.defer();
-      $http.post('https://solinte.net/OAuth2/Token', {
-                                                      grant_type:'password',
-                                                      client_id:'misuperapp',
-                                                      client_secret:'misuperappsecret',
-                                                      username:'demo11@solinte.net',
-                                                      password:'demo'
-                                                      })
+      $http.post('https://solinte.net/OAuth2/Token', "grant_type=" + encodeURIComponent(dat.grant_type) +
+                     "&client_id=" + encodeURIComponent(dat.misuperapp)+
+                     "&client_secret=" + encodeURIComponent(dat.client_secret)+
+                     "&username=" + encodeURIComponent(dat.username)+
+                     "&password=" + encodeURIComponent(dat.password))
       .success(function(response, status){
         deferred.resolve(response);
       })
