@@ -1,50 +1,14 @@
-.container {
-  position: absolute;
-  left: calc( 50% - 150px);
-  margin-top: 20px;
-}
-.roulette {
-  position: absolute;
-  margin: 0 auto;
-  width: 300px;
-  height: 300px;
-  left: 40%;
-  background-color: red;
-  background-image: url('phieneasroulette.png');
-  border-radius: 300px;
+/* Empty. Add your own CSS if you like */
+
+.logoContainer{
+
+	width: 75%;
+	margin-left: 12.5%;
+	margin-top: 20px
+
 }
 
-.texto{
+.logoContainer img{
 
-	position: absolute;
-width: 100%;
-text-align: center;
-margin-top: 350px;
-font-size: 20px;
+	width: 100%;
 }
-
-.spinner {
-  cursor: pointer;
-  color: red;
-  font-weight: bold;
-  border: none;
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  top: 125px;
-  left: 125px;
-  border-radius: 100%;
-  z-index: 1000;
-  background-color: white;
-}
-
-.spinner .pointer {
-  position: absolute;
-  width: 0; 
-	height: 0; 
-  top: -8px;
-  left: 15px;
-	border-left: 10px solid transparent;
-	border-right: 10px solid transparent;
-	border-bottom: 10px solid red;
-}/* Empty. Add your own CSS if you like */
