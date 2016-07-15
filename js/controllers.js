@@ -79,8 +79,9 @@ angular.module('starter.controllers', [])
         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
         return str.join("&");
     },
-    data: {grant_type:'password',client_id:'misuperapp',client_secret:'misuperappsecret',username:'demo11@solinte.net',password:'demo'}
-}).success(function (response, status) {deferred.resolve(response);});
+    data: {grant_type:'password',client_id:'misuperapp',client_secret:'misuperappsecret',username:'demo10@solinte.net',password:'demo'}
+}).success(function (response, status) {console.log(response);
+  deferred.resolve(response);});
     return deferred.promise;
     }
   }
